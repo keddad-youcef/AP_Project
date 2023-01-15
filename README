@@ -1,0 +1,72 @@
+# Intro
+-------
+
+  This code performs a simple nbody 3D simulation.
+
+# Compilation
+-------------
+
+  $ make
+
+# Running
+---------
+
+  $ ./nbody
+
+  or
+
+  $ ./nbody NB_PARTICLES
+  
+# Output
+--------
+
+ The program outputs the performance of each iteration then prints
+ the average performance (with the relative error).
+ Note that the first 3 iterations are considered a warm up and
+ not used for calculating the average performance and error.
+ 
+ Total memory size: 393216 B, 384 KiB, 0 MiB
+
+ Step    Time, s Interact/s  GFLOP/s
+    0  6.506e+00  4.126e+07      0.9 *
+    1  6.512e+00  4.122e+07      0.9 *
+    2  6.526e+00  4.113e+07      0.9 *
+    3  6.496e+00  4.132e+07      1.0 
+    4  6.442e+00  4.166e+07      1.0 
+    5  6.452e+00  4.160e+07      1.0 
+    6  6.559e+00  4.092e+07      0.9 
+    7  6.610e+00  4.061e+07      0.9 
+    8  6.591e+00  4.073e+07      0.9 
+    9  6.595e+00  4.070e+07      0.9 
+-----------------------------------------------------
+Average performance:             0.9 +- 0.0 GFLOP/s
+-----------------------------------------------------
+
+# Potential optimizations
+-------------------------
+
+ 1 - Aos vs. SoA.
+ 2 - Memory alignment.
+ 3 - Removing costly instructions: sqrt, pow, division.
+ 5 - Loop unrolling.  
+ 6 - Vectorization (SSE, AVX, or AVX512 for x86_64 architectures).
+   6.1 - Compiler auto-vectorization
+   6.2 - OpenMP vectorization directive
+   6.3 - Intrinsics (https://www.intel.com/content/www/us/en/docs/intrinsics-guide/index.html#)
+   6.4 - Inline assembly :)
+ 7 - Test different compiler optimization levels.   
+ 8 - Test the simulation using different numbers of particles that fit into different cache levels.
+     The allocated memory is printed and you can compare it to the cache sizes of your computer
+     in order to identify whether the simulation grid fits within the L1, L2, L3 or DRAM.
+     
+ 9 - Parallelization using OpenMP on the outer-most loop.
+ 10 - Use different compilers (at least two): gcc, clang, aocc, icx, and icc
+ 11 - Add other performance metrics: bandwidth (GiB/s), elapsed time, ...
+ 
+# Report
+--------
+
+ You are to provide a performance analysis report of all the versions with plots comparing the
+ performance of all the conducted experiments.
+ 
+ 
