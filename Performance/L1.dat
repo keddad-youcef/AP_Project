@@ -1,0 +1,7 @@
+BASE	        0.7
+SoA	            17.5
+Div	            42.4
+AVX	            53
+Parallel	    85.9
+Paral-AVX	    106.5
+
