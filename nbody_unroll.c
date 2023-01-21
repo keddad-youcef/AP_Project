@@ -59,8 +59,7 @@ void move_particles(particles_t *p, const f32 dt, u64 n)
   const f32 softening = 1e-20;
   
   //
-#pragma GCC unroll 8
-#pragma GCC ivdep
+#pragma unroll
     for (u64 i = 0; i < n; ++i) {
       //
       #pragma simd
@@ -72,8 +71,7 @@ void move_particles(particles_t *p, const f32 dt, u64 n)
       const f32 dyi = p->y[i];
       const f32 dzi = p->z[i];
 
-#pragma GCC unroll 8
-#pragma GCC ivdep
+#pragma unroll
         //24 floating-point operations
         for (u64 j = 0; j < n; ++j) {
             //Newton's law
@@ -98,6 +96,7 @@ void move_particles(particles_t *p, const f32 dt, u64 n)
         p->vz[i] += dt * fz; //24 (mul, add)
     }
     //3 floating-point operations
+    #pragma unroll
     for (u64 i = 0; i < n; i++) {
       p->x[i] += dt * p->vx[i];
       p->y[i] += dt * p->vy[i];
